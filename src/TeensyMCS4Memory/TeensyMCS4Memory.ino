@@ -5,9 +5,6 @@
 // by Ryo Mukai
 //
 
-#define TRUE (0==0)
-#define FALSE !TRUE
-
 #define min(x, y) (((x)<(y)) ? (x): (y))
 #define max(x, y) (((x)>(y)) ? (x): (y))
 
@@ -140,7 +137,7 @@ void setup() {
 
 void loop() {
   word address = 0;
-  bool access_rom = FALSE;
+  bool access_rom = false;
   int cycle = Cycle_X3;
   
   ARM_DWT_CYCCNT = 0; /* reset counter */
@@ -161,7 +158,7 @@ void loop() {
     setPhase(5); /* Phase 5 */
     if(cycle == Cycle_A3 && digitalRead(CMROM) == 0){
       /* CMROM is negative logic */
-      access_rom = TRUE;
+      access_rom = true;
     }
     setPhase(6); /* Phase 6 */
     if(cycle == Cycle_A1){
@@ -173,7 +170,7 @@ void loop() {
     }
     if(digitalRead(SYNC) == 0){ /* SYNC is negative logic */
       cycle = Cycle_A1;
-      access_rom = FALSE;
+      access_rom = false;
     } else {
       cycle++;
       if(cycle > Cycle_X3){
